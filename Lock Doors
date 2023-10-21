@@ -1,0 +1,40 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class LockedDoors : MonoBehaviour
+{
+    public bool locked;
+    public bool WantsUn;
+    public HingeJoint hinge;
+    public GameObject officer;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        hinge = gameObject.GetComponent<HingeJoint>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if(Vector3.Distance(gameObject.transform.position, officer.transform.position) <= 3 || WantsUn)
+        {
+            locked = false;
+        }
+        else
+        {
+            locked = true;
+        }
+
+        if (locked)
+        {
+            hinge.massScale = hinge.massScale = 10000; 
+
+        }
+        else
+        {
+            hinge.massScale = 1;
+        }
+    }
+}
